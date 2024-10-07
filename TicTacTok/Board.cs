@@ -8,6 +8,14 @@ namespace TicTacTok
 {
     internal class Board
     {
+
+        string text = @"
+ __ __| _)           __ __|                __ __|            
+    |    |   __|        |   _` |   __|        |   _ \    _ \ 
+    |    |  (           |  (   |  (           |  (   |   __/ 
+   _|   _| \___|       _| \__,_| \___|       _| \___/  \___| 
+                                                             ";
+
         string CenterText(string text)
         {
             int consoleWidth = Console.WindowWidth;
@@ -19,33 +27,43 @@ namespace TicTacTok
         public void DrawBoard()
         {
 
+            int consoleWidth = Console.WindowWidth;
+
+            // Split the text into lines
+            string[] lines = text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string line in lines)
+            {
+                // Calculate the number of spaces needed to center the line
+                int spacesToPad = (consoleWidth - line.Length) / 2;
+
+                // Create a padded line with leading spaces
+                string centeredLine = new string(' ', spacesToPad) + line;
+                string textColor = "\u001b[38;2;65;105;225m";
+                // Write the centered line to the console
+                Console.WriteLine(textColor+centeredLine);
+            }
+            string borderColor = "\u001b[38;2;148;0;211m";
             // Set border color
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(CenterText("┌─────────────┬─────────────┬─────────────┐"));
+            Console.WriteLine(CenterText($"{borderColor}┌─────────────┬─────────────┬─────────────┐"));
 
             // Set symbol color
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(CenterText($"│      {GetSymbol(cells[0])}      │      {GetSymbol(cells[1])}      │      {GetSymbol(cells[2])}      │"));
+            Console.WriteLine(CenterText($"{borderColor}│      {GetSymbol(cells[0])}      │      {GetSymbol(cells[1])}      │      {GetSymbol(cells[2])}      │"));
 
             // Set border color
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(CenterText("├─────────────┼─────────────┼─────────────┤"));
+            Console.WriteLine(CenterText($"{borderColor}├─────────────┼─────────────┼─────────────┤"));
 
             // Set symbol color
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(CenterText($"│      {GetSymbol(cells[3])}      │      {GetSymbol(cells[4])}      │      {GetSymbol(cells[5])}      │"));
+            Console.WriteLine(CenterText($"{borderColor}│      {GetSymbol(cells[3])}      │      {GetSymbol(cells[4])}      │      {GetSymbol(cells[5])}      │"));
 
             // Set border color
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(CenterText("├─────────────┼─────────────┼─────────────┤"));
+            Console.WriteLine(CenterText($"{borderColor}├─────────────┼─────────────┼─────────────┤"));
 
             // Set symbol color
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(CenterText($"│      {GetSymbol(cells[6])}      │      {GetSymbol(cells[7])}      │      {GetSymbol(cells[8])}      │"));
+            Console.WriteLine(CenterText($"{borderColor}│      {GetSymbol(cells[6])}      │      {GetSymbol(cells[7])}      │      {GetSymbol(cells[8])}      │"));
 
             // Set border color
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(CenterText("└─────────────┴─────────────┴─────────────┘"));
+            Console.WriteLine(CenterText($"{borderColor}└─────────────┴─────────────┴─────────────┘"));
 
             // Reset color
             Console.ResetColor();
